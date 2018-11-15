@@ -7,15 +7,33 @@ const routes = require('./routes')
 const pkg = require('./package')
 const winston = require('winston')
 const expressWinston = require('express-winston')
+const ejs = require('ejs')
+const mime = require('mime')
 
 const app = express()
+
+// // 设置模板目录
+app.set('views', path.join(__dirname, 'public'))
+// // 设置模板引擎为 html
+app.engine('.html', ejs.__express)
+app.set('view engine', 'html')
+
+app.get('/', function (req, res) {
+  // res.sendFile(path.join(__dirname, 'public/index.html'))
+  // res.render('index', {title: 'res vs app render'}) <%= title %>
+  res.render('index')
+})
 
 app.all('*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', req.headers.origin || '*') // 支持跨域调用
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Origin, Accept')// 允许支持跨域的自定义header字段
   res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS') // 实际请求中允许携带的首部字段
   res.header('Access-Control-Allow-Credentials', true) // 可以带cookies
-  res.header('Content-Type', 'application/json;charset=utf-8')
+  if (req.url.match(/assets/)) {
+    res.header('Content-Type', mime.getType(req.url))
+  } else {
+    res.header('Content-Type', 'application/json;charset=utf-8')
+  }
   res.header('X-Powered-By', '3.2.1')
   if (req.method === 'OPTIONS') {
     res.send(200)
@@ -25,7 +43,7 @@ app.all('*', (req, res, next) => {
 })
 
 // 设置静态文件目录
-app.use('/static', express.static(path.join(__dirname, 'public')))
+app.use('/assets', express.static(path.join(__dirname, 'public')))
 
 // session 中间件
 app.use(
