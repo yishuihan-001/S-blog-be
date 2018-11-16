@@ -18,6 +18,8 @@
     "express-formidable": "^1.2.0",
     "express-session": "^1.15.6",
     "express-winston": "^3.0.1",
+    "highlight.js": "^9.13.1",
+    "markdown-it": "^8.4.2",
     "marked": "^0.5.1",
     "mime": "^2.3.1",
     "moment": "^2.22.2",

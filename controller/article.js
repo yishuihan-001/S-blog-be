@@ -159,9 +159,9 @@ class Article {
       .populate({ path: 'author', model: 'User' })
       .addCreatedAt()
       .addCommentsCount()
-      .contentToHtml()
+      // .contentToHtml()
       .fullImgPath()
-      .removeSpare()
+      // .removeSpare()
       .exec()
   }
 
