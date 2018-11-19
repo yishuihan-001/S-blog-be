@@ -146,9 +146,9 @@ class Article {
       .sort({ _id: -1 })
       .addCreatedAt()
       .addCommentsCount()
-      .contentToHtml()
+      // .contentToHtml()
       .fullImgPath()
-      .removeSpare()
+      // .removeSpare()
       .exec()
   }
 
@@ -171,7 +171,7 @@ class Article {
       .findOne({ _id: postId })
       .populate({ path: 'author', model: 'User' })
       .fullImgPath()
-      .removeSpare()
+      // .removeSpare()
       .exec()
   }
 
@@ -182,9 +182,9 @@ class Article {
       .populate({ path: 'author', model: 'User' })
       .sort({ _id: 1 })
       .addCreatedAt()
-      .contentToHtml()
+      // .contentToHtml()
       .fullImgPath()
-      .removeSpare()
+      // .removeSpare()
       .exec()
   }
 

@@ -4,13 +4,6 @@ const Mongolass = require('mongolass')
 const mongolass = require('../lib/mongo')
 const config = require('config-lite')(__dirname)
 
-// 同步使用 highlight.js 转换代码
-// marked.setOptions({
-//   highlight: function (code) {
-//     return require('highlight.js').highlightAuto(code).value
-//   }
-// })
-
 const Article = mongolass.model('Post', {
   author: { type: Mongolass.Types.ObjectId, required: true },
   title: { type: 'string', required: true },
